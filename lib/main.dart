@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'ร้านอาหาร'),
     );
   }
 }
@@ -39,28 +39,49 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                );
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.search),
+                tooltip: 'Show Snackbar',
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.local_grocery_store_outlined),
+                tooltip: 'shopping basket',
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.notifications_none),
+                tooltip: 'Show Snackbar',
+                onPressed: () {},
+              ),
+            ],
+            bottom: TabBar(
+              tabs: [
+                Tab(text: 'หน้าแรก'),
+                Tab(text: 'ติดตาม'),
+              ],
             ),
-          ],
+            title: Text('CSC Pre-Order'),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
