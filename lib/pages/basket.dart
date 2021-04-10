@@ -29,7 +29,8 @@ class _BasketState extends State<Basket> {
       appBar: AppBar(
         title: Text('ตระกร้าสินค้า'),
       ),
-      body: Column(children: [
+      body: Column(
+        children: [
         Row(
           children: [
             Container(
@@ -74,7 +75,8 @@ class _BasketState extends State<Basket> {
             ),
           ],
         ),
-      ]),
+      ]
+      ),
     );
   }
 }
