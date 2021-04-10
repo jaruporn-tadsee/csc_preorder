@@ -1,13 +1,16 @@
 import 'package:csc_preorder_beta/models/post.dart';
+import 'package:csc_preorder_beta/pages/basket.dart';
+import 'package:csc_preorder_beta/pages/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 final bool _isLogin = false;
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,20 @@ class _HomePageState extends State<HomePage> {
           'CSC-PreOrder',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
-        actions: [IconButton(icon: Icon(Icons.search), onPressed: () => {})],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SearchPage()))
+                  }),
+          IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Basket()))
+                  })
+        ],
       ),
       body: ListView.separated(
           itemBuilder: (BuildContext context, int index) =>
@@ -69,15 +85,34 @@ class _HomePageState extends State<HomePage> {
         builder: (_) => CupertinoActionSheet(
               actions: [
                 CupertinoActionSheetAction(
-                    onPressed: () => {}, child: Text('รายงานร้านค้า')),
+                    onPressed: () => {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.info_outline_rounded),
+                        Text('รายงานร้านค้า'),
+                      ],
+                    )),
                 CupertinoActionSheetAction(
-                    onPressed: () => {}, child: Text('data')),
+                    onPressed: () => {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('data'),
+                      ],
+                    )),
                 CupertinoActionSheetAction(
                     onPressed: () => {}, child: Text('data')),
               ],
               cancelButton: CupertinoActionSheetAction(
                 onPressed: () => {Navigator.of(context).pop()},
-                child: Text('ยกเลิก'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.cancel_presentation),
+                    Text('ยกเลิก'),
+                  ],
+                ),
               ),
             ));
   }
@@ -157,6 +192,17 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ))
+                ],
+              ),
+            ),
+            Container(
+              child: Wrap(
+                children: [
+                  Container(
+                    child: Image(
+                        image: NetworkImage(
+                            'https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg')),
+                  )
                 ],
               ),
             )

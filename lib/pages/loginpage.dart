@@ -1,85 +1,123 @@
 import 'package:flutter/material.dart';
-import 'package:csc_preorder_beta/pages/homepage.dart';
 
-class LoginPage extends StatelessWidget {
-  final bool _isThaiLang = true;
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool visible = true;
+  String username, password;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.white, Colors.orange])),
-        padding: EdgeInsets.all(50),
-        child: Center(
-            child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), color: Colors.white),
+      body: Form(
+          child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(15.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                    'https://kuse.csc.ku.ac.th/~alumni/images/KUSE_png-01.png'),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  _isThaiLang ? 'ลงชื่อเข้าใช้งาน' : 'Please Login',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      labelText: _isThaiLang ? 'ชื่อผู้ใช้งาน' : 'Username',
-                      hintText: _isThaiLang
-                          ? 'โปรดกรอกชื่อผู้ใช้งาน'
-                          : 'Enter your username'),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      labelText: _isThaiLang ? 'รหัสผ่าน' : 'Password',
-                      hintText: _isThaiLang
-                          ? 'โปรดกรอกรหัสผ่าน'
-                          : 'Enter your secure password'),
-                ),
-              ),
+              // form
               Container(
-                padding: EdgeInsets.all(20),
-                child: ElevatedButton(
-                    onPressed: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()))
-                        },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        _isThaiLang ? 'ลงชื่อเข้าใช้งาน' : 'Sign In',
-                        style: TextStyle(fontSize: 18),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 100),
+                      child: Center(
+                        child: Text("CSC-PreOrder",
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            )),
                       ),
-                    )),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    TextFormField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(16.0),
+                        hintText: 'Username',
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: BorderSide.none),
+                        filled: true,
+                        fillColor: Colors.grey.withOpacity(0.1),
+                      ),
+                      onSaved: (str) => {username = str},
+                    ),
+                    SizedBox(height: 12.0),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: visible,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(16.0),
+                          hintText: 'Password',
+                          prefixIcon: Icon(Icons.lock),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              borderSide: BorderSide.none),
+                          filled: true,
+                          fillColor: Colors.grey.withOpacity(0.1),
+                          suffix: InkWell(
+                            child: visible
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                            onTap: () => {
+                              setState(() => {visible = !visible})
+                            },
+                          )),
+                      onSaved: (str) => {password = str},
+                    ),
+                    SizedBox(height: 20.0),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          child: Text('Submit'.toUpperCase()),
+                          onPressed: () => {},
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                          )),
+                    )
+                  ],
+                ),
               )
             ],
           ),
-        )),
+        ),
+      )),
+      bottomNavigationBar: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Don't have any account ?",
+                style: TextStyle(color: Colors.grey),
+              ),
+              TextButton(
+                  onPressed: () => {},
+                  child: Text(
+                    "Sign up",
+                    style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold),
+                  ))
+            ],
+          ),
+        ),
       ),
     );
   }

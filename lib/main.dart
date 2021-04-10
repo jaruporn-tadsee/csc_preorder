@@ -7,7 +7,7 @@ void main() {
   runApp(MyApp());
 }
 
-final bool _isLogin = false;
+final bool _isLogin = true;
 
 class MyApp extends StatelessWidget {
   @override
@@ -19,4 +19,6 @@ class MyApp extends StatelessWidget {
       home: _isLogin ? HomePage() : LoginPage(),
     );
   }
+
+  
 }
