@@ -1,0 +1,10 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 3306,
+        "username": "preorder",
+        "password": "kuse@csc",
+        "database": "preorder"
+    },
+    "secret": "CSCPreOrder"
+}
