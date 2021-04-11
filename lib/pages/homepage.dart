@@ -1,4 +1,4 @@
-import 'package:csc_preorder_beta/models/globalList.dart';
+import 'package:csc_preorder_beta/models/dataModel.dart';
 import 'package:csc_preorder_beta/pages/search.dart';
 import 'package:csc_preorder_beta/pages/shopping_cart.dart';
 import 'package:flutter/cupertino.dart';
