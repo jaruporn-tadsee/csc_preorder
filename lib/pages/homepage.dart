@@ -1,6 +1,6 @@
-import 'package:csc_preorder_beta/models/post.dart';
-import 'package:csc_preorder_beta/pages/basket.dart';
+import 'package:csc_preorder_beta/models/globalList.dart';
 import 'package:csc_preorder_beta/pages/search.dart';
+import 'package:csc_preorder_beta/pages/shopping_cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-final bool _isLogin = false;
+final bool _isLogin = true;
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.shopping_cart),
               onPressed: () => {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Basket()))
+                        MaterialPageRoute(builder: (context) => ShoppingCart()))
                   })
         ],
       ),

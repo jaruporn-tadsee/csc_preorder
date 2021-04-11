@@ -1,4 +1,4 @@
-final List postsJson = [
+List postsJson = [
   {
     "postId": null,
     "storeId": null,
@@ -45,3 +45,29 @@ final List postsJson = [
   },
 ];
 
+List cart = [
+  {
+    "storeName": "ร้านยำนายปัง",
+    "menus": [
+      {
+        "productId": null,
+        "menuName": "ยำหมูยอ",
+        "price": 50,
+        "imageUri":
+            "https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg"
+      },
+    ],
+  },
+  {
+    "storeName": "ร้านยำนายปัง",
+    "menus": [
+      {
+        "productId": null,
+        "menuName": "ยำหมูยอ",
+        "price": 50,
+        "imageUri":
+            "https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg"
+      },
+    ],
+  }
+];
