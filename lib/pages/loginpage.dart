@@ -1,3 +1,7 @@
+import 'package:csc_preorder_beta/pages/fpasspage.dart';
+import 'package:csc_preorder_beta/pages/homepage.dart';
+import 'package:csc_preorder_beta/pages/registerpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toast/toast.dart';
@@ -9,19 +13,18 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool visible = true;
-  String email, password;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   @override
-  void dispose() {
-    if (this.mounted) super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
+  void initState() {
+    super.initState();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       body: Form(
           child: SingleChildScrollView(
         child: Container(
@@ -59,14 +62,11 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                         fillColor: Colors.grey.withOpacity(0.1),
                       ),
-                      validator: validateEmail,
-                      onSaved: (str) => {email = str},
                     ),
                     SizedBox(height: 12.0),
                     TextFormField(
                       controller: _passwordController,
                       obscureText: visible,
-                      validator: validatePassword,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(16.0),
                           hintText: 'รหัสผ่าน',
@@ -84,14 +84,13 @@ class _LoginPageState extends State<LoginPage> {
                               setState(() => {visible = !visible})
                             },
                           )),
-                      onSaved: (str) => {password = str},
                     ),
                     SizedBox(height: 20.0),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                           child: Text('ลงชื่อเข้าใช้งาน'),
-                          onPressed: () => {},
+                          onPressed: () => signIn(),
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
@@ -105,7 +104,13 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgotPassword()));
+                                },
                                 child: Text('ลืมรหัสผ่าน ?',
                                     style: TextStyle(
                                         color: Colors.black87,
@@ -176,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                           margin: EdgeInsets.all(0.0),
                           child: ElevatedButton(
                             onPressed: () {
-                              Toast.show("ยังไม่เปิดให้ใช้งาน", context,
+                              Toast.show("เร็ว ๆ นี้", context,
                                   duration: Toast.LENGTH_SHORT,
                                   gravity: Toast.BOTTOM);
                             },
@@ -202,7 +207,11 @@ class _LoginPageState extends State<LoginPage> {
                           height: 60,
                           margin: EdgeInsets.all(0.0),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Toast.show("เร็ว ๆ นี้", context,
+                                  duration: Toast.LENGTH_SHORT,
+                                  gravity: Toast.BOTTOM);
+                            },
                             child: Icon(
                               FontAwesomeIcons.google,
                               size: 20,
@@ -241,7 +250,10 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(color: Colors.grey),
               ),
               TextButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Register()))
+                      },
                   child: Text(
                     "สมัครเลย",
                     style: TextStyle(
@@ -256,27 +268,29 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  String validateEmail(String value) {
-    String pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp = new RegExp(pattern);
-    if (value.isEmpty) {
-      return 'Email is required';
-    } else if (!regExp.hasMatch(value)) {
-      return 'Invalid Email';
-    } else {
-      return null;
-    }
+  // methods of auth
+  signIn() {
+    _auth
+        .signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim())
+        .then((user) {
+      print("signed in");
+      checkAuth(context);
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(error.message, style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.red,
+      ));
+    });
   }
 
-  String validatePassword(String value) {
-    if (value.isEmpty) {
-      return 'Password is required';
-    } else if (value.length < 4) {
-      return 'Password must be at least 4 characters';
+  Future checkAuth(BuildContext context) async {
+    User user = _auth.currentUser;
+    if (user != null) {
+      print("Already signed-in with ${user.email}");
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage(user)));
     }
-    return null;
   }
 }
-
-class TitleMode {}

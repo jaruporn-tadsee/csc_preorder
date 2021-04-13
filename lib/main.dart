@@ -1,16 +1,16 @@
-import 'package:csc_preorder_beta/models/main_serveice.dart';
 import 'package:csc_preorder_beta/pages/loginpage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:csc_preorder_beta/pages/homepage.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  LoginStatus loginStatus = LoginStatus();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: loginStatus.loginStatus() ? HomePage() : LoginPage(),
+      home: LoginPage(),
     );
   }
 }

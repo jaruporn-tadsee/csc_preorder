@@ -1,23 +1,30 @@
 import 'package:csc_preorder_beta/models/dataModel.dart';
-import 'package:csc_preorder_beta/models/main_serveice.dart';
+import 'package:csc_preorder_beta/pages/loginpage.dart';
 import 'package:csc_preorder_beta/pages/search.dart';
 import 'package:csc_preorder_beta/pages/shopping_cart.dart';
 import 'package:csc_preorder_beta/pages/store.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
 
 class HomePage extends StatefulWidget {
+  final User user;
+  HomePage(this.user, {Key key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  LoginStatus _loginStatus = LoginStatus();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
+  initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: _loginStatus.loginStatus() ? buildDrawer() : null,
+      drawer: buildDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: Text(
@@ -56,9 +63,10 @@ class _HomePageState extends State<HomePage> {
         DrawerHeader(
           child: Column(
             children: [
-              Row(
+              Column(
                 children: [
                   Text('Drawer Header'),
+                  Text(widget.user.email, style: TextStyle(fontSize: 16)),
                 ],
               ),
             ],
@@ -78,7 +86,10 @@ class _HomePageState extends State<HomePage> {
         ListTile(
           leading: Icon(Icons.logout),
           title: Text('ออกจากระบบ'),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
         ),
       ],
     ));
@@ -224,5 +235,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void signOut(BuildContext context) {
+    _auth.signOut();
+    print("Signed out");
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        ModalRoute.withName('/'));
   }
 }
