@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "352657162964",
+    "project_id": "csc-preorder",
+    "storage_bucket": "csc-preorder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352657162964:android:1be3598a3ee9b4298db141",
+        "android_client_info": {
+          "package_name": "com.example.csc_preorder_beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352657162964-pc9b2t391kc5hq1ko8lp8g5oettcqhu5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG6zsWBf5SwyUkozfEM4M5CClnp_kH7kg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352657162964-pc9b2t391kc5hq1ko8lp8g5oettcqhu5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

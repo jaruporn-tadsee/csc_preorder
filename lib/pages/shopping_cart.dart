@@ -10,6 +10,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   bool _editCart = false;
   bool _editList = false;
   bool _selectList = false;
+  int _nofList = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
             },
             icon: _editCart ? Icon(Icons.check) : Icon(Icons.edit),
           )
-          
         ],
       ),
       body: ListView.builder(
@@ -54,12 +54,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         children: [
                           Text(
                             "ชื่อร้าน : ร้านยำ",
-                            style: TextStyle(fontSize: 18),
                           ),
                           SizedBox(
                             width: 20,
                           ),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 10,
+                          )
                         ],
                       )),
                 ),
@@ -93,11 +95,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "ชื่อสินค้า",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text("50฿")
+                    Text("50฿",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Container(
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {},
+                            iconSize: 18,
+                          ),
+                          SizedBox(
+                            child: Text("$_nofList"),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 )
               ],

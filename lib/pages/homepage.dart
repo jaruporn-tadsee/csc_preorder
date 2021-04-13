@@ -1,26 +1,28 @@
 import 'package:csc_preorder_beta/models/dataModel.dart';
+import 'package:csc_preorder_beta/models/main_serveice.dart';
 import 'package:csc_preorder_beta/pages/search.dart';
 import 'package:csc_preorder_beta/pages/shopping_cart.dart';
+import 'package:csc_preorder_beta/pages/store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:date_format/date_format.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-final bool _isLogin = true;
-
 class _HomePageState extends State<HomePage> {
+  LoginStatus _loginStatus = LoginStatus();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: _isLogin ? buildDrawer() : null,
+      drawer: _loginStatus.loginStatus() ? buildDrawer() : null,
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: Text(
           'CSC-PreOrder',
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView.separated(
           itemBuilder: (BuildContext context, int index) =>
-              postBuilder(postsJson),
+              postBuilder(postsJson, context),
           separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
           itemCount: postsJson.length),
@@ -64,19 +66,22 @@ class _HomePageState extends State<HomePage> {
           decoration: BoxDecoration(color: Colors.orange),
         ),
         ListTile(
-          title: Text('Item 1'),
+          leading: Icon(Icons.all_inbox),
+          title: Text('การซื้อของฉัน'),
           onTap: () {},
         ),
         ListTile(
-          title: Text('Item 2'),
+          leading: Icon(Icons.person),
+          title: Text('ตั้งค่าโปรไฟล์'),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('ออกจากระบบ'),
           onTap: () {},
         ),
       ],
     ));
-  }
-
-  TextStyle _fontStyle() {
-    return TextStyle(fontSize: 16);
   }
 
   void showActionSheet(BuildContext context) {
@@ -98,11 +103,19 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('data'),
+                        Icon(Icons.storefront),
+                        Text('ไปที่ร้านค้า'),
                       ],
                     )),
                 CupertinoActionSheetAction(
-                    onPressed: () => {}, child: Text('data')),
+                    onPressed: () => {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.share),
+                        Text('แชร์'),
+                      ],
+                    )),
               ],
               cancelButton: CupertinoActionSheetAction(
                 onPressed: () => {Navigator.of(context).pop()},
@@ -117,9 +130,12 @@ class _HomePageState extends State<HomePage> {
             ));
   }
 
-  InkWell postBuilder(Object postJson) {
+  InkWell postBuilder(Object postJson, context) {
     return InkWell(
-      onTap: () => {},
+      onTap: () => {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => StoreFront()))
+      },
       child: Card(
         child: Column(
           children: [
@@ -147,23 +163,33 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                           'ร้านยำแซ่บ BY นายปัง',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                              fontWeight: FontWeight.bold, fontSize: 18),
                         )),
                         IconButton(
                           onPressed: () => {showActionSheet(context)},
                           icon: Icon(Icons.more_horiz),
                         )
                       ]),
-                      Container(
-                        child: Text(
-                          'ส่งวันที่ ' + DateTime.now().toString(),
-                          style: _fontStyle(),
-                        ),
+                      Text(
+                        'ส่งวันที่ : ' +
+                            formatDate(DateTime(2021, 4, 12),
+                                [dd, ' - ', mm, ' - ', yyyy]),
                       )
                     ],
                   ),
                 ))
               ],
+            ),
+            Container(
+              child: Wrap(
+                children: [
+                  Container(
+                    child: Image(
+                        image: NetworkImage(
+                            'https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg')),
+                  )
+                ],
+              ),
             ),
             Container(
               padding: EdgeInsets.only(left: 20),
@@ -179,7 +205,6 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.all(10),
                             child: Text(
                               'menuName',
-                              style: _fontStyle(),
                             ),
                           )),
                           Container(
@@ -195,17 +220,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Container(
-              child: Wrap(
-                children: [
-                  Container(
-                    child: Image(
-                        image: NetworkImage(
-                            'https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg')),
-                  )
-                ],
-              ),
-            )
           ],
         ),
       ),
