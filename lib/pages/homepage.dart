@@ -7,9 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
+
   HomePage(this.user, {Key key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
@@ -17,6 +19,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
   @override
   initState() {
     super.initState();
@@ -87,8 +91,17 @@ class _HomePageState extends State<HomePage> {
           leading: Icon(Icons.logout),
           title: Text('ออกจากระบบ'),
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
+            _auth.signOut().then((data) {
+              return googleSignIn.signOut();
+            }).then((data) {
+              print("Sign-out successfully");
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            }).catchError((e) {
+              print(e);
+            });
           },
         ),
       ],
