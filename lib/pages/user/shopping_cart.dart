@@ -1,3 +1,5 @@
+import 'package:csc_preorder_beta/pages/order/paymentpage.dart';
+import 'package:csc_preorder_beta/pages/user/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:csc_preorder_beta/models/dataModel.dart';
 
@@ -11,6 +13,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   bool _editList = false;
   bool _selectList = false;
   int _nofList = 0;
+  var userCart = UserCart.fromJson(cart);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ),
       body: ListView.builder(
           itemBuilder: (BuildContext context, int index) => cartBuilder(cart),
-          itemCount: cart.length),
+          itemCount: userCart.cart.length),
+      bottomNavigationBar: buildButtomBar(),
     );
   }
 
@@ -53,7 +57,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       child: Row(
                         children: [
                           Text(
-                            "ชื่อร้าน : ร้านยำ",
+                            '${userCart.storeName}',
                           ),
                           SizedBox(
                             width: 20,
@@ -112,7 +116,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
                           SizedBox(
                             child: Text("$_nofList"),
-                          )
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.remove),
+                            onPressed: () {},
+                            iconSize: 18,
+                          ),
                         ],
                       ),
                     )
@@ -124,5 +133,56 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ),
       ),
     );
+  }
+
+  Container buildButtomBar() {
+    return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 7),
+            ],
+            color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text("รวมทั้งหมด"),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "100฿",
+                  style: TextStyle(
+                      color: Colors.orange, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextButton(
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PaymentPage()))
+                  },
+                  child: Text(
+                    "ชำระเงิน",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }

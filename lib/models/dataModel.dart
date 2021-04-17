@@ -1,73 +1,53 @@
-List postsJson = [
-  {
-    "postId": null,
-    "storeId": null,
-    "storeName": "ร้านยำนายปัง",
-    "menus": [
-      {"productId": null, "menuName": "ยำหมูยอ", "price": 50, "available": 20},
-      {
-        "productId": null,
-        "menuName": "ยำไส้กรอก",
-        "price": 50,
-        "available": 20
-      },
-      {
-        "productId": null,
-        "menuName": "ยำไข่แดงเค็ม",
-        "price": 65,
-        "available": 20
-      },
-      {"productId": null, "menuName": "ยำกุ้งสด", "price": 70, "available": 20}
-    ],
-    "duedate": DateTime.now()
-  },
-  {
-    "postId": null,
-    "storeId": null,
-    "storeName": "ร้านยำนายปัง",
-    "menus": [
-      {"productId": null, "menuName": "ยำหมูยอ", "price": 50, "available": 20},
-      {
-        "productId": null,
-        "menuName": "ยำไส้กรอก",
-        "price": 50,
-        "available": 20
-      },
-      {
-        "productId": null,
-        "menuName": "ยำไข่แดงเค็ม",
-        "price": 65,
-        "available": 20
-      },
-      {"productId": null, "menuName": "ยำกุ้งสด", "price": 70, "available": 20}
-    ],
-    "duedate": DateTime.now()
-  },
-];
+Map<String, Object> cart = {
+  "usercart": "e6682815-98d0-4880-8d39-ad1bcd77eee7",
+  "storeId": "209feffe-2846-474a-93f6-1725cd1c910c",
+  "storeName": "ร้านยำนายปัง",
+  "cart": [
+    {
+      "productId": "607969bf9a02b3ae90e578a7",
+      "productName": "string",
+      "productPrice": 1,
+      "quantity": 1
+    },
+    {
+      "productId": "607969bf69ddefdf55664935",
+      "productName": "string",
+      "productPrice": 1,
+      "quantity": 1
+    }
+  ]
+};
 
-List cart = [
-  {
-    "storeName": "ร้านยำนายปัง",
-    "menus": [
-      {
-        "productId": null,
-        "menuName": "ยำหมูยอ",
-        "price": 50,
-        "imageUri":
-            "https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg"
-      },
-    ],
-  },
-  {
-    "storeName": "ร้านยำนายปัง",
-    "menus": [
-      {
-        "productId": null,
-        "menuName": "ยำหมูยอ",
-        "price": 50,
-        "imageUri":
-            "https://img.wongnai.com/p/1968x0/2019/03/15/82df1e50644f4c97a0890913cac6bc1d.jpg"
-      },
-    ],
-  }
-];
+Object genPost = {
+  "genPost": [
+    {
+      "postId": "postId",
+      "storeId": "storeId",
+      "storeName": "storeName",
+      "products": [
+        {"productId": "ProductId", "productName": "productName", "price": 1},
+        {"productId": "ProductId", "productName": "productName", "price": 1},
+        {"productId": "ProductId", "productName": "productName", "price": 1},
+        {"productId": "ProductId", "productName": "productName", "price": 1}
+      ]
+    },
+    {
+      "postId": "postId",
+      "storeId": "storeId",
+      "storeName": "storeName",
+      "products": [
+        {"productId": "ProductId", "productName": "productName", "price": 1},
+        {"productId": "ProductId", "productName": "productName", "price": 1},
+        {"productId": "ProductId", "productName": "productName", "price": 1}
+      ]
+    },
+    {
+      "postId": "postId",
+      "storeId": "storeId",
+      "storeName": "storeName",
+      "products": [
+        {"productId": "ProductId", "productName": "productName", "price": 1}
+      ]
+    }
+  ]
+};

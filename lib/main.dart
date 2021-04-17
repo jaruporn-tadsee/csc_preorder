@@ -1,4 +1,4 @@
-import 'package:csc_preorder_beta/pages/loginpage.dart';
+import 'package:csc_preorder_beta/pages/login/loginpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
