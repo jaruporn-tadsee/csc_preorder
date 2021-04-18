@@ -56,41 +56,60 @@ onDeliveryList() {
     child: Card(
       child: Column(
         children: [
-          headerBuilder(),
-          
+          // header
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(4),
+                child: CircleAvatar(
+                  backgroundColor: Colors.amber,
+                ),
+              ),
+              Container(
+                child: Text(
+                  'StoreName',
+                  style: TextStyle(color: Colors.black45),
+                ),
+              ),
+              Spacer(),
+              Container(
+                padding: EdgeInsets.only(right: 8),
+                child: Text(
+                  'จัดส่งวันที่ : ' +
+                      formatDate(
+                          DateTime(2021, 4, 12), [dd, ' - ', mm, ' - ', yyyy]),
+                  style: TextStyle(
+                    color: Colors.amber,
+                  ),
+                ),
+              )
+            ],
+          ),
+          // body of list
+          Container(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
+                    child: SizedBox(
+                      child: Image(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(
+                            'https://scontent.fbkk12-3.fna.fbcdn.net/v/t1.6435-9/163565193_120840966682848_3524140195171092480_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=8bfeb9&_nc_eui2=AeGU4HkUu9I2TRINDVbP84aHBOekn3VROHoE56SfdVE4ekn-Yw3VC0edHzbDgRQlrH-jQGx64F3hENJD0xJX_6r7&_nc_ohc=DpDPigREQzwAX-51Ia8&_nc_ht=scontent.fbkk12-3.fna&oh=0cc685abeb2af59843286bb143a333af&oe=60A0A7AC'),
+                      ),
+                    ),
+                  ),
+                  title: Text('productName'),
+                  trailing: Text("฿productPrice" + " x" + "quantity"),
+                )
+              ],
+            ),
+          )
         ],
       ),
     ),
   );
-}
-
-Row headerBuilder() {
-  return Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(4),
-              child: CircleAvatar(
-                backgroundColor: Colors.amber,
-              ),
-            ),
-            Container(
-              child: Text(
-                'StoreName',
-                style: TextStyle(color: Colors.black45),
-              ),
-            ),
-            Spacer(),
-            Container(
-              padding: EdgeInsets.only(right: 8),
-              child: Text(
-                'จัดส่งวันที่ : ' +
-                    formatDate(
-                        DateTime(2021, 4, 12), [dd, ' - ', mm, ' - ', yyyy]),
-                style: TextStyle(
-                  color: Colors.amber,
-                ),
-              ),
-            )
-          ],
-        );
 }
