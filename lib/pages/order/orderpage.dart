@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 
 class OrderPage extends StatefulWidget {
@@ -42,6 +43,54 @@ class _OrderPageState extends State<OrderPage> {
         );
       });
 
-  Container onDeliveryTab() => Container();
+  Container onDeliveryTab() => Container(
+          child: ListView.builder(
+        itemBuilder: (BuildContext context, int index) => onDeliveryList(),
+        itemCount: 2,
+      ));
   Container onSuccessTab() => Container();
+}
+
+onDeliveryList() {
+  return Container(
+    child: Card(
+      child: Column(
+        children: [
+          headerBuilder(),
+          
+        ],
+      ),
+    ),
+  );
+}
+
+Row headerBuilder() {
+  return Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(4),
+              child: CircleAvatar(
+                backgroundColor: Colors.amber,
+              ),
+            ),
+            Container(
+              child: Text(
+                'StoreName',
+                style: TextStyle(color: Colors.black45),
+              ),
+            ),
+            Spacer(),
+            Container(
+              padding: EdgeInsets.only(right: 8),
+              child: Text(
+                'จัดส่งวันที่ : ' +
+                    formatDate(
+                        DateTime(2021, 4, 12), [dd, ' - ', mm, ' - ', yyyy]),
+                style: TextStyle(
+                  color: Colors.amber,
+                ),
+              ),
+            )
+          ],
+        );
 }

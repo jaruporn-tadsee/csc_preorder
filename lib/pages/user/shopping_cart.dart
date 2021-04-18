@@ -1,4 +1,4 @@
-import 'package:csc_preorder_beta/pages/order/paymentpage.dart';
+import 'package:csc_preorder_beta/pages/order/comfirmOrder.dart';
 import 'package:csc_preorder_beta/pages/user/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:csc_preorder_beta/models/dataModel.dart';
@@ -170,7 +170,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 child: TextButton(
                   onPressed: () => {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PaymentPage()))
+                        MaterialPageRoute(builder: (context) => ConfirmOrder()))
                   },
                   child: Text(
                     "ชำระเงิน",
