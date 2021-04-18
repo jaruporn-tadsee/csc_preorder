@@ -194,21 +194,38 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       Row(children: [
-                        Expanded(
-                            child: Text(
-                          "ร้านยำนายปัง",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        )),
+                        TextButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StoreFront())),
+                          child: SizedBox(
+                            child: Container(
+                              child: Text(
+                                "ร้านยำนายปัง",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacer(),
                         IconButton(
                           onPressed: () => {showActionSheet(context)},
                           icon: Icon(Icons.more_horiz),
                         )
                       ]),
-                      Text(
-                        'ส่งวันที่ : ' +
-                            formatDate(DateTime(2021, 4, 12),
-                                [dd, ' - ', mm, ' - ', yyyy]),
+                      SizedBox(
+                        child: Container(
+                          width: double.infinity,
+                          child: Text(
+                            'ส่งวันที่ : ' +
+                                formatDate(DateTime(2021, 4, 12),
+                                    [dd, ' - ', mm, ' - ', yyyy]),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
                       )
                     ],
                   ),

@@ -10,7 +10,7 @@ class _ProductState extends State<Product> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("StoreName"),
+        title: Text("ProductName"),
       ),
     );
   }
