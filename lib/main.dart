@@ -1,4 +1,6 @@
+// import 'package:csc_preorder_beta/pages/homepage/homepage.dart';
 import 'package:csc_preorder_beta/pages/login/loginpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +13,7 @@ Future<void> main() async {
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
+  User user;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,6 +22,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
       home: LoginPage(),
+      // routes: {
+      //   '/': (context) => HomePage(user),
+      //   '/login': (context) => LoginPage()
+      // },
     );
   }
 }

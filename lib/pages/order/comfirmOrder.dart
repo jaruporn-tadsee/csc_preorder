@@ -215,7 +215,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                     borderRadius: BorderRadius.circular(10)),
                 child: TextButton(
                   onPressed: () => {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => OrderPage()))
                   },
                   child: Text(

@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Column(
                 children: [
-                  Text('Drawer Header'),
+                  Text('Welcome'),
                   Text(widget.user.email, style: TextStyle(fontSize: 16)),
                 ],
               ),
@@ -256,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                       child: Container(
                     padding: EdgeInsets.all(10),
-                    child: Text(""),
+                    child: Text("ProductName"),
                   )),
                   Container(
                     child: Text('Price'),
