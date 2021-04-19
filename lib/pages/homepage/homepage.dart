@@ -78,8 +78,29 @@ class _HomePageState extends State<HomePage> {
             children: [
               Column(
                 children: [
-                  Text('Welcome'),
-                  Text(widget.user.email, style: TextStyle(fontSize: 16)),
+                  SizedBox(
+                      child: Container(
+                    child: Text('Welcome'),
+                    width: double.infinity,
+                  )),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                      Text(widget.user.email, style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                  SizedBox(
+                    child: Container(
+                      width: double.infinity,
+                      child: Text('ที่อยู่ : USerAddress'),
+                    ),
+                  )
                 ],
               ),
             ],
