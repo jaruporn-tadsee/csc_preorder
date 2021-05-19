@@ -1,4 +1,4 @@
-import 'package:csc_preorder_beta/pages/order/comfirmOrder.dart';
+import 'package:csc_preorder_beta/pages/order/comfirm_order.dart';
 import 'package:csc_preorder_beta/pages/user/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:csc_preorder_beta/models/dataModel.dart';

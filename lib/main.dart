@@ -22,10 +22,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
       home: LoginPage(),
-      // routes: {
-      //   '/': (context) => HomePage(user),
-      //   '/login': (context) => LoginPage()
-      // },
     );
   }
 }
